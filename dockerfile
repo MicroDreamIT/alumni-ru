@@ -1,14 +1,14 @@
 FROM python:3.10
 
 ENV PYTHONUNBUFFERED=1
+RUN mkdir /app
+WORKDIR /app
 
-WORKDIR /code
-
-COPY requirements.txt
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY . /app
 
 EXPOSE 8000
 
