@@ -883,3 +883,4 @@ local_settings.py
 .env
 db.sqlite3
 /backend/accounts/migrations/
+/frontend/.nuxt/
