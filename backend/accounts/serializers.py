@@ -11,7 +11,7 @@ from .models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
+        exclude = ['user']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -56,11 +56,23 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
+        profile_data = validated_data.pop('profile')
+        print([user_data, profile_data])
+        # first_name = validated_data.pop('first_name')
+        # last_name = validated_data.pop('last_name')
+        # profile_data = validated_data.pop('profile')
         user = User.objects.create_user(
-            validated_data['username'],
-            validated_data['first_name'],
-            validated_data['last_name'],
-            validated_data['email'],
-            validated_data['password'],
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            **user_data
         )
+        # Profile.objects.create(user=user, **profile_data)
+        # profile_data = validated_data.pop('profile')
+        # print(profile_data)
+        # print(profile_data)
+        # profile = Profile.objects.create(
+        #     user = user,
+        #     profile_data
+        # )
         return user

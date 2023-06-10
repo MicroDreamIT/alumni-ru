@@ -63,12 +63,6 @@ class RegisterView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        password = serializer.validated_data['password']
-        password_confirmation = serializer.validated_data['password_confirmation']
-
-        if password != password_confirmation:
-            raise serializer.ValidationError("The passwords do not match.")
-
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         token, created = Token.objects.get_or_create(user=serializer.instance)
