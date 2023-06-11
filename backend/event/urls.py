@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import EventsAPI
+# from .views import EventsAPI
 urlpatterns = [
-    path('', EventsAPI.as_views())
+    # path('', EventsAPI.as_views())
 ]

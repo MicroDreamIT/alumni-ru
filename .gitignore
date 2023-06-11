@@ -813,6 +813,7 @@ dmypy.json
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**
 
 # Generated files
 .idea/**/contentModel.xml
@@ -883,4 +884,5 @@ local_settings.py
 .env
 db.sqlite3
 /backend/accounts/migrations/
+/backend/event/migrations/
 /frontend/.nuxt/

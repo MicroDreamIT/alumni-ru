@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import generics
 
 
-class EventsAPI(generics.GenericAPIView):
-    @classmethod
-    def as_views(cls):
-        pass
+# class EventsAPI(generics.GenericAPIView):
+#     @classmethod
+#     def as_views(cls):
+#         pass
