@@ -18,6 +18,7 @@ class EventModelTest(TestCase):
             city=fake.city(),
             country='Bangladesh',
             event_date=fake.date(),
+            is_active=fake.boolean(),
             registration_start_date=fake.date(),
             registration_end_date=fake.date()
         )
@@ -87,5 +88,3 @@ class EventModelTest(TestCase):
         self.assertIsInstance(str(event), str)
 
     # Add more test methods for other model behaviors
-
-
