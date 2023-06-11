@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
-# Create your views here.
-from rest_framework import generics
+from .models import Event
+from .serializers import EventSerializer
 
 
-# class EventsAPI(generics.GenericAPIView):
-#     @classmethod
-#     def as_views(cls):
-#         pass
+class EventView(ListAPIView):
+    pagination_class = PageNumberPagination
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        return Event.objects.all()

@@ -5,6 +5,7 @@ from django.db import models
 class Event(models.Model):
     title = models.CharField(max_length=151, db_index=True)
     description = models.TextField(blank=True, null=True)
+    banner = models.ImageField(blank=True, upload_to='events')
     venue = models.CharField(max_length=151, db_index=True)
     street_address = models.CharField(max_length=151, db_index=True, blank=True)
     state = models.CharField(max_length=151, db_index=True, blank=True)
@@ -17,8 +18,11 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-event_date']
 
         def __str__(self) -> str:
+            return self.title
+
+        def __unicode__(self):
             return self.title
 
