@@ -1,20 +1,14 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: {enabled: true},
-    css: ["@/assets/styles/main.scss"],
-    vite: {
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    additionalData: '@use "@/assets/main.scss" as *;'
-                }
-            }
-        }
-    },
+    css: [
+        '@/assets/styles/app.scss',
+    ],
     postcss: {
         plugins: {
             tailwindcss: {},
             autoprefixer: {},
         },
     },
+    extractCSS: true,
+    ssr: false
 })
