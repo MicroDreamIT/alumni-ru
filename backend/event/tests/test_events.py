@@ -17,7 +17,8 @@ class EventModelTest(TestCase):
             state=fake.state(),
             city=fake.city(),
             country='Bangladesh',
-            event_date=fake.date(),
+            event_date_start=fake.date(),
+            event_date_end=fake.date(),
             is_active=fake.boolean(),
             registration_start_date=fake.date(),
             registration_end_date=fake.date()
@@ -65,11 +66,17 @@ class EventModelTest(TestCase):
         self.assertEqual(country.verbose_name, 'country')
         self.assertEqual(event.country, 'Bangladesh')
 
-    def test_event_date_field(self):
+    def test_event_date_start_field(self):
         event = Event.objects.get(id=1)
-        event_date = event._meta.get_field('event_date')
-        self.assertEqual(event_date.verbose_name, 'event date')
-        self.assertIsInstance(event.event_date, datetime.date)
+        event_date_start = event._meta.get_field('event_date_start')
+        self.assertEqual(event_date_start.verbose_name, 'event date start')
+        self.assertIsInstance(event.event_date_start, datetime.date)
+
+    def test_event_date_end_field(self):
+        event = Event.objects.get(id=1)
+        event_date_end = event._meta.get_field('event_date_end')
+        self.assertEqual(event_date_end.verbose_name, 'event date end')
+        self.assertIsInstance(event.event_date_end, datetime.date)
 
     def test_registration_start_date_field(self):
         event = Event.objects.get(id=1)
