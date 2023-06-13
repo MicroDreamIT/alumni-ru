@@ -1,11 +1,13 @@
 <template>
     <div>
-        I am home
+        Alright Receiver
     </div>
 </template>
 
 <script>
-
+    export default {
+        name: "DefaultFooter"
+    }
 </script>
 
 <style scoped>
