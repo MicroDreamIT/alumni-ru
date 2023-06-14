@@ -1,1 +1,17 @@
 @import "main.scss";
+
+.router-link-active {
+    font-weight: bold;
+  @apply text-blue-600;
+
+  &:hover {
+    @apply text-blue-800;
+  }
+}
+
+.everything-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
