@@ -1,13 +1,12 @@
 <template>
     <div>
-        I am events
+        I am events data:
+        <pre>
+            {{events}}
+        </pre>
     </div>
 </template>
 
-<script>
-
+<script lang="ts" setup>
+    const {data: events} = await useFetch('http://localhost:8000/api/events/')
 </script>
-
-<style scoped>
-
-</style>
