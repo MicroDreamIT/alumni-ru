@@ -14,8 +14,14 @@
                 <h3>Browse upcoming events in the RU community</h3>
             </div>
 
-            <div>
-                <EventCard :event="event" v-for="event in events.results"></EventCard>
+            <div class="flex flex-col items-center">
+                <EventCard
+                        :event-detail="eventDetail"
+                        v-if="!_isEmpty(eventDetail)"
+                        v-for="eventDetail in eventsArr?.results"
+                        :key="eventDetail.id"
+                        class="border-b-2 border-gray-200"
+                ></EventCard>
             </div>
 
         </div>
@@ -23,7 +29,28 @@
 </template>
 <script lang="ts" setup>
     import EventCard from '~/components/events/EventCard.vue'
-    const {data: events} = await useFetch('http://localhost:8000/api/events/');
+
+    const {data: events} = await useFetch('http://localhost:8000/api/events/')
+
+    const eventDetail = {
+        title: '',
+        event_date_start: '',
+        venue: '',
+    };
+
+    const eventsArr = computed<Object>(() => {
+        // return events.value.results
+        events.value?.results?.map(s => {
+            // console.log(s)
+            s.event_date_start_arr = new Date(s.event_date_start)
+                .toLocaleString("en-US",
+                    {timeZone: 'Asia/Dhaka', month: 'short', day: '2-digit', year: 'numeric'})
+                .replace(',', '')
+                .split(' ')
+        })
+        return events.value
+    })
+
 </script>
 
 <style lang="scss" scoped>
