@@ -10,8 +10,8 @@ export default defineNuxtPlugin((nuxtApp) => {
                     }
                 ) : _truncate(value)
             },
-            dateFullTextFormat: (val: string) => {
-                return ''
+            // dateFullTextFormat: (val: string) => {
+            //     return ''
                 // const date = new Date(val)
                 // .toLocaleString("en-US",
                 //     {
@@ -23,7 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
                 // date.getMonth()
                 // date.getDay()
                 // date.getFullYear()
-            }
+            // }
         },
     }
 })
