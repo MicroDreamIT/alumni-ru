@@ -4,8 +4,8 @@ https://freefrontend.com/tailwind-navbars/
 https://tailwindcomponents.com/component/navbar-hamburger-menu
 -->
 <template>
-    <div >
-        <nav class="relative px-4 py-4 flex justify-between items-center bg-white mx-auto p-2 sm:p-4 lg:p-6 max-w-screen-xl">
+    <div class="container mx-auto">
+        <nav class="relative py-4 flex justify-between items-center bg-white mx-auto py-2 sm:py-4 lg:py-6">
             <a class="text-3xl font-bold leading-none" href="#">
                 <svg class="h-10" alt="logo" viewBox="0 0 10240 10240">
                     <path xmlns="http://www.w3.org/2000/svg"

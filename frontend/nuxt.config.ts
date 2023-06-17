@@ -16,7 +16,17 @@ export default defineNuxtConfig({
     },
     extractCSS: true,
     ssr: true,
-    modules: ["nuxt-lodash"],
+    modules: [
+        "nuxt-lodash",
+        "nuxt-icon",
+        "dayjs-nuxt"
+    ],
+    dayjs: {
+        locales: ['en'],
+        plugins: ['relativeTime', 'utc', 'timezone'],
+        defaultLocale: 'en',
+        defaultTimezone: 'Asia/Dhaka',
+    },
     lodash: {
         prefix: "_",
         prefixSkip: ["string"],
@@ -27,5 +37,5 @@ export default defineNuxtConfig({
             ["kebabCase", "stringToKebab"], // => stringToKebab
             ["isDate", "isLodashDate"], // => _isLodashDate
         ],
-    },
+    }
 })

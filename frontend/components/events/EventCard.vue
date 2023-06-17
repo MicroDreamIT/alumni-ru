@@ -12,11 +12,11 @@
         </div>
         <div class="col-span-2 md:col-span-3 lg:col-span-5">
             <div class="text-2xl leading-relaxed font-bold">
-<!--                <nuxt-link-->
-<!--                        :to="{name:'events[id]', params:{id:eventDetail.slug}}"-->
-<!--                >-->
-<!--                    {{eventDetail.title}}-->
-<!--                </nuxt-link>-->
+                <nuxt-link
+                        :to="{name:'events-id', params:{id:eventDetail.slug}}"
+                >
+                    {{eventDetail.title}}
+                </nuxt-link>
             </div>
             <div class="leading-relaxed">{{$trunc(eventDetail.description, 150)}}</div>
             <div class="leading-relaxed flex">
