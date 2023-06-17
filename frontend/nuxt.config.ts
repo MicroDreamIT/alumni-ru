@@ -6,8 +6,14 @@ export default defineNuxtConfig({
         },
     },
     css: [
-        '@/assets/styles/app.scss',
+        '@/assets/styles/app.scss'
     ],
+    vue: {
+        compilerOptions: {
+            // treat all tags starting with "add-" as custom elements, added this for add-to-calendar
+            isCustomElement: (tag) => tag.startsWith('add-'),
+        },
+    },
     postcss: {
         plugins: {
             tailwindcss: {},
@@ -16,7 +22,7 @@ export default defineNuxtConfig({
     },
     extractCSS: true,
     ssr: true,
-    noExternal: ['dayjs'],
+    noExternal: ['dayjs', 'add-to-calendar-button'],
     modules: [
         "nuxt-lodash",
         "nuxt-icon",
@@ -38,5 +44,5 @@ export default defineNuxtConfig({
             ["kebabCase", "stringToKebab"], // => stringToKebab
             ["isDate", "isLodashDate"], // => _isLodashDate
         ],
-    }
+    },
 })

@@ -886,4 +886,7 @@ local_settings.py
 db.sqlite3
 /backend/accounts/migrations/
 /backend/event/migrations/
+/frontend/.nuxt/**
 /frontend/.nuxt/
+.vscode/
+backend/.DS_Store
