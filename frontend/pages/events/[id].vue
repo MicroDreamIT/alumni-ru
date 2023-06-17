@@ -17,9 +17,11 @@
 </template>
 
 <script lang="ts" setup>
+
     const route = useRoute();
     const id = (route.params.id).split('-')[0];
     const {data: eventDetail} = await useFetch('http://localhost:8000/api/events/' + id)
+
 </script>
 
 <style scoped>

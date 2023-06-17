@@ -9,22 +9,8 @@ export default defineNuxtPlugin((nuxtApp) => {
                         omission: '...'
                     }
                 ) : _truncate(value)
-            },
-            // dateFullTextFormat: (val: string) => {
-            //     return ''
-                // const date = new Date(val)
-                // .toLocaleString("en-US",
-                //     {
-                //         weekday: 'long',
-                //         month: 'short',
-                //         year: 'numeric',
-                //         timeZone: 'Asia/Dhaka',
-                //     })
-                // date.getMonth()
-                // date.getDay()
-                // date.getFullYear()
-            // }
-        },
+            }
+        }
     }
 })
 

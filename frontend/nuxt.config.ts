@@ -16,10 +16,11 @@ export default defineNuxtConfig({
     },
     extractCSS: true,
     ssr: true,
+    noExternal: ['dayjs'],
     modules: [
         "nuxt-lodash",
         "nuxt-icon",
-        "dayjs-nuxt"
+        'dayjs-nuxt'
     ],
     dayjs: {
         locales: ['en'],

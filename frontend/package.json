@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "sass": "^1.63.3",
-    "sass-loader": "^13.3.2"
+    "sass-loader": "^13.3.2",
+    "vue-add-to-calendar": "^1.0.7"
   }
 }
