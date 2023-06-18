@@ -10,9 +10,9 @@ class EventModelTest(TestCase):
     def setUpTestData(cls):
         fake = Faker()
         Event.objects.create(
-            title=fake.word(),
-            description=fake.paragraph(),
-            venue=fake.word(),
+            title=fake.word(nb=5),
+            description=fake.paragraph(nb_sentences=50),
+            venue=fake.company(),
             street_address=fake.street_address(),
             state=fake.state(),
             city=fake.city(),
