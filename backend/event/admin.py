@@ -1,5 +1,6 @@
 from django.contrib import admin
-
+from django.urls import reverse
+from django.utils.html import format_html
 # Register your models here.
 from .models import Event, RegisteredUser, Ticket
 
@@ -10,11 +11,19 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class RegisteredUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'event_id', 'ticket']
-    def event_id(self, obj):
-        return obj.event_set.first().id if obj.event_set.exists() else None
+    list_display = ['id', 'user', 'event_id_link', 'ticket']
+    list_display_links = ['id']
+    search_fields=['event__id']
+    @admin.display(ordering='event__id')
 
-    event_id.short_description = 'Event ID'
+    def event_id_link(self, obj):
+        event = obj.event_set.first()
+        if event:
+            event_admin_url = reverse('admin:event_event_change', args=[event.id])
+            return format_html('<a href="{}">{}</a>', event_admin_url, event.id)
+        return None
+
+    event_id_link.short_description = 'Event ID'
 
 
 

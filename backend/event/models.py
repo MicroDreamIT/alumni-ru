@@ -20,6 +20,12 @@ class RegisteredUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.user.username
+
+    def __str__(self) -> str:
+        return self.user.username
+
 
 class Event(models.Model):
     title = models.CharField(max_length=151, db_index=True)
