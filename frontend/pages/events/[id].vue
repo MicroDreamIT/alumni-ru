@@ -32,6 +32,7 @@
                 </div>
             </div>
             <div class="col-span-2 leading-relaxed">
+                <p>{{ eventDetail.tags[0] }}</p>
                 <h1>{{ eventDetail.title }}</h1>
                 <h2>Event Detail</h2>
                 <p>{{ eventDetail.description }}</p>

@@ -2,7 +2,11 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 # Register your models here.
-from .models import Event, RegisteredUser, Ticket
+from .models import AudienceType, Event, RegisteredUser, Ticket
+
+
+class AudienceTypeAdmin(admin.ModelAdmin):
+    pass
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -26,11 +30,11 @@ class RegisteredUserAdmin(admin.ModelAdmin):
     event_id_link.short_description = 'Event ID'
 
 
-
 class TicketAdmin(admin.ModelAdmin):
     list_display =['id', 'name', 'price', 'created_at', 'updated_at']
 
 
+admin.site.register(AudienceType, AudienceTypeAdmin)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(RegisteredUser, RegisteredUserAdmin)
 admin.site.register(Event, EventAdmin)

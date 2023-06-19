@@ -1,7 +1,7 @@
 import datetime
 
 from django.test import TestCase
-from ..models import Event
+from ..models import Event, EventTag
 from faker import Faker
 
 
@@ -9,6 +9,10 @@ class EventModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         fake = Faker()
+        EventTag.objects.create(
+            name = fake.word()
+        )
+
         Event.objects.create(
             title=fake.word(nb=5),
             description=fake.paragraph(nb_sentences=50),

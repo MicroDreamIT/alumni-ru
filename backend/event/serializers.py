@@ -1,19 +1,30 @@
 from django.utils.text import slugify
 from rest_framework import serializers
-from taggit.models import Tag
-from taggit.serializers import (TagListSerializerField,
-                                TaggitSerializer)
-from .models import Event
+from .models import AudienceType, Event, EventTag, Ticket
 
-class TagListSerializer(serializers.HyperlinkedModelSerializer):
+
+class EventTagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tag
-        fields = ('id', 'name', 'url')
+        model = EventTag
+        exclude = ['created_at', 'updated_at']
+
+
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        exclude = ['created_at', 'updated_at']
+
+
+class AudienceTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AudienceType
+        exclude = ['created_at', 'updated_at']
 
 
 class EventSerializer(serializers.ModelSerializer):
     slug = serializers.SerializerMethodField()
-    tags = TagListSerializerField()
+    tags = EventTagSerializer(many=True, read_only=True)
+    audience_type = AudienceTypeSerializer(many=True, read_only=True)
 
     @staticmethod
     def get_slug(instance):

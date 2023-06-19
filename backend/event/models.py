@@ -1,6 +1,29 @@
 from django.contrib.auth.models import User
 from django.db import models
-from taggit.managers import TaggableManager
+
+
+class EventTag(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class AudienceType(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self) -> str:
+        return self.name
+
 
 class Ticket(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -13,6 +36,7 @@ class Ticket(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
 
 class RegisteredUser(models.Model):
     user = models.ForeignKey(User, db_index=True, on_delete=models.CASCADE)
@@ -47,8 +71,9 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # foreign fields
     ticket = models.ManyToManyField(Ticket, blank=True)
+    audience_type = models.ManyToManyField(AudienceType, blank=True)
     registered_user = models.ManyToManyField(RegisteredUser, blank=True)
-    tags = TaggableManager()
+    tags = models.ManyToManyField(EventTag, blank=True)
 
     class Meta:
         ordering = ['-event_date_start']

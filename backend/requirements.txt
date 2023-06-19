@@ -5,6 +5,7 @@ django-cors-headers==4.1.0
 django-filter==23.2
 django-seed==0.3.1
 djangorestframework==3.14.0
+factory-boy==3.2.1
 Faker==18.10.1
 importlib-metadata==6.6.0
 Markdown==3.4.3
