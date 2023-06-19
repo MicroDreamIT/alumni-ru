@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_seed',
     'corsheaders',
+    'taggit',
 
     'accounts',
     'event'
