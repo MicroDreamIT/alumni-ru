@@ -18,7 +18,7 @@
                     {{eventDetail.title}}
                 </nuxt-link>
             </div>
-            <div class="leading-relaxed">{{$trunc(eventDetail.description, 150)}}</div>
+            <div class="leading-relaxed">{{$trunc($removeHtml(eventDetail.description), 150)}}</div>
             <div class="leading-relaxed flex">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="w-6 h-6">
@@ -48,6 +48,7 @@
         eventDetail: Object as PropType<eventDetail>
     })
     const {$trunc} = useNuxtApp()
+    const {$removeHtml} = useNuxtApp()
 
 </script>
 

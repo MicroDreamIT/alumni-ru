@@ -9,6 +9,10 @@ export default defineNuxtPlugin((nuxtApp) => {
                         omission: '...'
                     }
                 ) : _truncate(value)
+            },
+            removeHtml: (val: string) => {
+                const doc = new DOMParser().parseFromString(val, 'text/html');
+                return doc.body.textContent || "";
             }
         }
     }

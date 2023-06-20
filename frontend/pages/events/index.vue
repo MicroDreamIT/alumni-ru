@@ -15,9 +15,9 @@
             </div>
 
             <div class="flex flex-col items-center">
-                <EventCard :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)"
+                <EventsCard :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)"
                     v-for="eventDetail in eventsArr?.results" :key="eventDetail.id" class="border-b-2 border-gray-200">
-                </EventCard>
+                </EventsCard>
 
 
                 <!-- pagination -->
@@ -86,8 +86,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import EventCard from '~/components/events/EventCard.vue'
-
 const { data: events } = await useFetch('http://localhost:8000/api/events/')
 
 const eventDetail = {

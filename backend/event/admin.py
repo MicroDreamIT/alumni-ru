@@ -7,10 +7,6 @@ from .models import AudienceType, Event, RegisteredUser, Ticket, Sponsor, EventS
 from tinymce.widgets import TinyMCE
 
 
-class AudienceTypeAdmin(admin.ModelAdmin):
-    pass
-
-
 class EventAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'venue', 'event_date_start', 'created_at']
     formfield_overrides = {
@@ -55,7 +51,7 @@ class EventSponsoredAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
-admin.site.register(AudienceType, AudienceTypeAdmin)
+admin.site.register(AudienceType)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(RegisteredUser, RegisteredUserAdmin)
 admin.site.register(Sponsor)
