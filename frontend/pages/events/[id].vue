@@ -76,8 +76,9 @@
                             </span>
                         </p>
                     </div>
+                    <!-- sponsor section -->
                     <div>
-
+                        <p class="text-center">Event Sponsored By</p>
                     </div>
                 </div>
             </div>

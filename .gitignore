@@ -890,3 +890,7 @@ db.sqlite3
 /frontend/.nuxt/
 .vscode/
 backend/.DS_Store
+backend/static
+backend/static/**
+backend/media
+

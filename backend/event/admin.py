@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.db import models
 # Register your models here.
-from .models import AudienceType, Event, RegisteredUser, Ticket
+from .models import AudienceType, Event, RegisteredUser, Ticket, Sponsor, EventSponsored
 from tinymce.widgets import TinyMCE
 
 
@@ -40,7 +40,13 @@ class TicketAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'price', 'created_at', 'updated_at']
 
 
+class EventSponsoredAdmin(admin.ModelAdmin):
+    list_display = ['id', 'sponsor', 'event']
+
+
 admin.site.register(AudienceType, AudienceTypeAdmin)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(RegisteredUser, RegisteredUserAdmin)
 admin.site.register(Event, EventAdmin)
+admin.site.register(Sponsor)
+admin.site.register(EventSponsored, EventSponsoredAdmin)

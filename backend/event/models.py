@@ -1,11 +1,13 @@
+import os
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class EventTag(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def __unicode__(self):
         return self.name
 
@@ -14,7 +16,7 @@ class EventTag(models.Model):
 
 
 class AudienceType(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -51,6 +53,23 @@ class RegisteredUser(models.Model):
         return self.user.username
 
 
+class Sponsor(models.Model):
+    def get_upload_path(instance, filename):
+        return os.path.join(
+        "sponsors", "sponsor_%s" % instance.id, filename)
+
+    name = models.CharField(max_length=151, db_index=True)
+    logo = models.ImageField(upload_to=get_upload_path)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.name
+    
+    def __unicode__(self):
+        return self.name
+
+
 class Event(models.Model):
     title = models.CharField(max_length=151, db_index=True)
     description = models.TextField(blank=True, null=True)
@@ -74,6 +93,7 @@ class Event(models.Model):
     audience_type = models.ManyToManyField(AudienceType, blank=True)
     registered_user = models.ManyToManyField(RegisteredUser, blank=True)
     tags = models.ManyToManyField(EventTag, blank=True)
+    sponsors = models.ManyToManyField(Sponsor, through='EventSponsored')
 
     class Meta:
         ordering = ['-event_date_start']
@@ -83,3 +103,23 @@ class Event(models.Model):
 
         def __unicode__(self):
             return self.title
+
+
+class EventSponsored(models.Model):
+    type = (
+        ("Financial", "Financial"),
+        ("In-Kind", "In-Kind"),
+        ("Media", "Media"),
+        ("Promotional", "Promotional"),
+        ("Merchandise", "Merchandise")
+    )
+    sponsor = models.ForeignKey(
+        Sponsor, db_index=True, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, db_index=True, on_delete=models.CASCADE)
+    type = models.CharField(max_length=50, choices=type, blank=True)
+    amount = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.sponsor.name
