@@ -25,6 +25,7 @@ class EventSerializer(serializers.ModelSerializer):
     slug = serializers.SerializerMethodField()
     tags = EventTagSerializer(many=True, read_only=True)
     audience_type = AudienceTypeSerializer(many=True, read_only=True)
+    ticket = TicketSerializer(many=True, read_only=True)
 
     @staticmethod
     def get_slug(instance):

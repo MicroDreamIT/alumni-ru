@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-    devtools: {enabled: true},
+    devtools: { enabled: true },
     runtimeConfig: {
         public: {
             baseURL: process.env.BASE_URL || 'https://api.example.com/',
@@ -45,4 +45,9 @@ export default defineNuxtConfig({
             ["isDate", "isLodashDate"], // => _isLodashDate
         ],
     },
+    components: [
+        {
+            path: '~/components',
+        },
+      ],
 })
