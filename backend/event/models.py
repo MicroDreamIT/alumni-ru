@@ -1,6 +1,7 @@
 import os
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 class EventTag(models.Model):
@@ -56,7 +57,10 @@ class RegisteredUser(models.Model):
 class Sponsor(models.Model):
     def get_upload_path(instance, filename):
         return os.path.join(
-        "sponsors", "sponsor_%s" % instance.id, filename)
+            "sponsors",
+            slugify(str(instance.id) + ' ' + instance.name),
+            filename
+        )
 
     name = models.CharField(max_length=151, db_index=True)
     logo = models.ImageField(upload_to=get_upload_path)
@@ -65,7 +69,7 @@ class Sponsor(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
     def __unicode__(self):
         return self.name
 
@@ -95,14 +99,14 @@ class Event(models.Model):
     tags = models.ManyToManyField(EventTag, blank=True)
     sponsors = models.ManyToManyField(Sponsor, through='EventSponsored')
 
+    def __str__(self) -> str:
+        return str(self.id)+'. '+self.title
+
+    def __unicode__(self):
+        return self.title
+
     class Meta:
         ordering = ['-event_date_start']
-
-        def __str__(self) -> str:
-            return self.title
-
-        def __unicode__(self):
-            return self.title
 
 
 class EventSponsored(models.Model):

@@ -30,7 +30,7 @@ class RegisteredUserAdmin(admin.ModelAdmin):
         if event:
             event_admin_url = reverse(
                 'admin:event_event_change', args=[event.id])
-            return format_html('<a href="{}">{}</a>', event_admin_url, event.id)
+            return format_html('<a href="{}">{}</a>', event_admin_url, event.id, event.title)
         return None
 
     event_id_link.short_description = 'Event ID'
@@ -41,12 +41,22 @@ class TicketAdmin(admin.ModelAdmin):
 
 
 class EventSponsoredAdmin(admin.ModelAdmin):
-    list_display = ['id', 'sponsor', 'event']
+    list_display = ['id', 'sponsor', 'event_id_link']
+    @admin.display(ordering='event__id')
+    def event_id_link(self, obj):
+        event = obj.event
+        if event:
+            event_admin_url = reverse(
+                'admin:event_event_change', args=[event.id])
+            return format_html('<a href="{}">{}</a>', event_admin_url, event.id)
+        return None
+
+    event_id_link.short_description = 'Event'
 
 
+admin.site.register(Event, EventAdmin)
 admin.site.register(AudienceType, AudienceTypeAdmin)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(RegisteredUser, RegisteredUserAdmin)
-admin.site.register(Event, EventAdmin)
 admin.site.register(Sponsor)
 admin.site.register(EventSponsored, EventSponsoredAdmin)
