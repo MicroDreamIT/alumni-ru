@@ -10,7 +10,7 @@
                 <ul class="flex flex-wrap justify-center mb-4">
                     <li class="mr-2">
                         <a @click="loginForm = false"
-                            :class="`cursor-pointer inline-block p-4 border-b-2 border-transparent rounded-t-lg ${!loginForm ? 'text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`">
+                            :class="`cursor-pointer inline-block p-4 ${!loginForm ? 'text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent rounded-t-lg'}`">
                             Register
                         </a>
                     </li>
