@@ -1,6 +1,6 @@
 <template>
     <div>
-        <GlobalBreadcrumb></GlobalBreadcrumb>
+        <GlobalBreadcrumb />
         <div class="container mx-auto xl:px-20 lg:px-10 px-2">
             <div class="grid lg:grid-cols-3 gap-10">
                 <div class="col-span-1">
@@ -10,6 +10,19 @@
                             <Icon name="material-symbols:calendar-month" color="dodgerblue" size="35px" />
                         </span>
                         <p class="leading-relaxed">{{ $dayjs(eventDetail.event_date_start).format('dddd MMM YYYY') }}</p>
+                    </div>
+
+                    <div class="flex pb-6">
+                        <div class="w-10 mr-2">
+                            <Icon name="ion:ticket-sharp" color="red" size="35px" />
+                        </div>
+                        <div>
+                            <p class="leading-relaxed font-bold">Ticket Detail:</p>
+                            <div v-for="(tk, index) in eventDetail.ticket" :key="'tk-' + index">
+                                <span>{{ tk.name }}: {{ tk.price }} BDT</span>
+                            </div>
+                            <TwButton class="leading-relaxed mt-2">Register Now</TwButton>
+                        </div>
                     </div>
 
                     <div class="flex pb-6">
@@ -45,18 +58,6 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex pb-6">
-                        <div class="w-10 mr-2">
-                            <Icon name="ion:ticket-sharp" color="red" size="35px" />
-                        </div>
-                        <div>
-                            <p class="leading-relaxed font-bold">Ticket Detail:</p>
-                            <div v-for="(tk, index) in eventDetail.ticket" :key="'tk-' + index">
-                                <span>{{ tk.name }}: {{ tk.price }} BDT</span>
-                            </div>
-                            <Button class="leading-relaxed mt-2">Register Now</Button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- right side content -->
@@ -78,11 +79,20 @@
                     </div>
                     <!-- sponsor section -->
                     <div>
-                        <p class="text-center">Event Sponsored By</p>
+                        <p class="text-center">
+                            Event Sponsored By (<TwButton types="link" @click="showRegister=true">Sponsor Now</TwButton>)
+                        </p>
+                        <div class="grid grid-cols-6 gap-5">
+                            <div v-for="(sp, index) in eventDetail.sponsors" :key="`sp-${index}`">
+                                <img :src="sp.logo" :alt="sp.name">
+                                <div class="text-xs text-gray-800 text-center">{{ sp.name }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <GlobalRegisterSponsor :eventDetail="eventDetail" v-if="showRegister" v-model='showRegister'/>
     </div>
 </template>
 
@@ -90,6 +100,8 @@
 import 'add-to-calendar-button'
 
 const route = useRoute()
+const showRegister = ref<Boolean>(false)
+
 let paramsValue = route.params.id
 const id = (paramsValue as string).split('-')[0]
 const { data: eventDetail } = await useFetch('http://localhost:8000/api/events/' + id)

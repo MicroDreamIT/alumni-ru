@@ -1,7 +1,7 @@
 @import "main.scss";
 
 .router-link-active {
-    font-weight: bold;
+  font-weight: bold;
   @apply text-blue-600;
 
   &:hover {
@@ -9,9 +9,36 @@
   }
 }
 
-.everything-center{
+.everything-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+// forms
+.input-text {
+  @apply appearance-none;
+  @apply block w-full;
+  @apply bg-gray-200;
+  @apply text-gray-700;
+  @apply border;
+  @apply border-gray-200;
+  @apply rounded;
+  @apply py-3;
+  @apply px-4;
+  @apply leading-tight;
+  @apply focus:outline-none;
+  @apply focus:bg-white;
+  @apply focus:border-gray-500;
+}
+
+.input-label {
+  @apply block;
+  @apply uppercase;
+  @apply tracking-wide;
+  @apply text-gray-700;
+  @apply text-xs;
+  @apply font-bold;
+  @apply mb-2;
 }
