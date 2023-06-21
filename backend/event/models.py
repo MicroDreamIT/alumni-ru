@@ -64,6 +64,8 @@ class Sponsor(models.Model):
 
     name = models.CharField(max_length=151, db_index=True)
     logo = models.ImageField(upload_to=get_upload_path)
+    phone_number = models.CharField(max_length=151)
+    email = models.CharField(max_length=151)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -122,6 +124,7 @@ class EventSponsored(models.Model):
     event = models.ForeignKey(Event, db_index=True, on_delete=models.CASCADE)
     type = models.CharField(max_length=50, choices=type, blank=True)
     amount = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
