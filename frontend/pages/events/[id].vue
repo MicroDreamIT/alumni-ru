@@ -80,19 +80,21 @@
                     <!-- sponsor section -->
                     <div>
                         <p class="text-center">
-                            Event Sponsored By (<TwButton types="link" @click="showRegister=true">Sponsor Now</TwButton>)
+                            Event Sponsored By (<TwButton types="link" @click="showRegister = true">Sponsor Now</TwButton>)
                         </p>
                         <div class="grid grid-cols-6 gap-5">
-                            <div v-for="(sp, index) in eventDetail.sponsors" :key="`sp-${index}`">
-                                <img :src="sp.logo" :alt="sp.name">
-                                <div class="text-xs text-gray-800 text-center">{{ sp.name }}</div>
-                            </div>
+                            <template v-for="(sp, index) in eventDetail.sponsors">
+                                <div :key="`sp-${index}`" v-if="sp">
+                                    <img :src="sp.sponsor.logo" :alt="sp.sponsor.name">
+                                    <div class="text-xs text-gray-800 text-center">{{ sp.sponsor.name }}</div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <GlobalRegisterSponsor :eventDetail="eventDetail" v-if="showRegister" v-model='showRegister'/>
+        <GlobalRegisterSponsor :eventDetail="eventDetail" v-if="showRegister" v-model='showRegister' />
     </div>
 </template>
 
