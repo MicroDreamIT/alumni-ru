@@ -16,15 +16,17 @@
         </div>
 
         <!-- featured event  -->
-        <div>
+        <div class="container mx-auto xl:px-20 lg:px-10 px-2">
             <p class="text-center text-3xl pt-10">
                 Featured Events
             </p>
-            <p class="subheading text-center">Peek at some alumni events happening just around the corner.</p>
-            <div class="grid grid-cols-3">
-
+            <p class="subheading text-center pt-3">Peek at some alumni events happening just around the corner.</p>
+            <div class="grid grid-cols-3 gap-10">
+                <div>hello</div>
+                <div>hello</div>
+                <div>hello</div>
             </div>
-            
+
         </div>
 
     </div>
