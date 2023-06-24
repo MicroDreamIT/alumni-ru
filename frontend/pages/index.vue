@@ -22,9 +22,9 @@
             </p>
             <p class="subheading text-center pt-3">Peek at some alumni events happening just around the corner.</p>
             <div class="grid grid-cols-3 gap-10">
-                <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
+                <template v-for="eventDetail in eventsArr?.results">
+                    <EventsCardrow></EventsCardrow>
+                </template>
             </div>
 
         </div>
@@ -32,8 +32,27 @@
     </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+const { data: events } = await useFetch('http://localhost:8000/api/events/?limit=3')
 
+const eventDetail = {
+    title: '',
+    event_date_start: '',
+    venue: '',
+};
+
+const eventsArr = computed<Object>(() => {
+    // return events.value.results
+    events.value?.results?.map(s => {
+        // console.log(s)
+        s.event_date_start_arr = new Date(s.event_date_start)
+            .toLocaleString("en-US",
+                { timeZone: 'Asia/Dhaka', month: 'short', day: '2-digit', year: 'numeric' })
+            .replace(',', '')
+            .split(' ')
+    })
+    return events.value
+})
 </script>
 
 <style scoped lang="scss">

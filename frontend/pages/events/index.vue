@@ -15,10 +15,12 @@
             </div>
 
             <div class="flex flex-col items-center">
-                <EventsCard :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)"
-                    v-for="eventDetail in eventsArr?.results" :key="eventDetail.id" class="border-b-2 border-gray-200">
-                </EventsCard>
-                
+                <template v-for="eventDetail in eventsArr?.results">
+                    <EventsCard :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)" :key="eventDetail.id"
+                        class="border-b-2 border-gray-200">
+                    </EventsCard>
+                </template>
+
                 <!-- pagination -->
                 <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
                     <div class="flex flex-1 justify-between sm:hidden">

@@ -10,8 +10,12 @@ class EventView(ListAPIView):
     permission_classes = AllowAny,
     pagination_class = PageNumberPagination
     serializer_class = EventSerializer
+    ordering = ['-event_date_start',]
 
     def get_queryset(self):
+        limit = self.request.query_params.get('limit')
+        if limit:
+            return Event.objects.all()[:int(limit)]
         return Event.objects.exclude(is_active=False)
 
 
