@@ -18,8 +18,7 @@
                 <EventsCard :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)"
                     v-for="eventDetail in eventsArr?.results" :key="eventDetail.id" class="border-b-2 border-gray-200">
                 </EventsCard>
-
-
+                
                 <!-- pagination -->
                 <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
                     <div class="flex flex-1 justify-between sm:hidden">
@@ -72,7 +71,8 @@ const eventsArr = computed<Object>(() => {
 
 </script>
 
-<style lang="scss" scoped>.responsive-bg {
+<style lang="scss" scoped>
+.responsive-bg {
     background-image: url('~/assets/images/event-banner.jpg');
     background-size: cover;
     background-position: center;
@@ -83,4 +83,5 @@ const eventsArr = computed<Object>(() => {
         height: auto;
         width: 1920px;
     }
-}</style>
+}
+</style>

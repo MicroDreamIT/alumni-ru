@@ -106,7 +106,10 @@ const showRegister = ref<Boolean>(false)
 
 let paramsValue = route.params.id
 const id = (paramsValue as string).split('-')[0]
+
 const { data: eventDetail } = await useFetch('http://localhost:8000/api/events/' + id)
+
+
 </script>
 
 <style scoped></style>
