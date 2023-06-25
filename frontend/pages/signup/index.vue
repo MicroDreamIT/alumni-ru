@@ -7,7 +7,8 @@
             <div class="grid grid-cols-2 gap-10 pt-10">
                 <div>
                     <label class="input-label" for="first_name">First Name</label>
-                    <Field name="first_name" class="input-text" type="text" id="first_name" v-model="form.first_name" rules="required" />
+                    <Field name="first_name" class="input-text" type="text" id="first_name" v-model="form.first_name"
+                        rules="required" />
                     <ErrorMessage class="text-red-500" name="first_name" />
                 </div>
                 <div>
@@ -17,46 +18,59 @@
                 </div>
                 <div>
                     <label class="input-label" for="phone_number">Phone Number</label>
-                    <Field name="phone_number" class="input-text" id="phone_number" type="text" v-model="form.phone_number" />
+                    <Field name="phone_number" class="input-text" id="phone_number" type="text"
+                        v-model="form.phone_number" />
+                    <ErrorMessage class="text-red-500" name="phone_number" />
                 </div>
                 <div>
                     <label class="input-label" for="gender">Gender</label>
-                    <select class="input-text" id="gender" v-model="form.gender">
+                    <select name="gender" class="input-text" id="gender" v-model="form.gender">
                         <option v-for="(value, key) in gender" :value="value" :key="`gen ${value}`">{{ key }}</option>
                     </select>
+                    <ErrorMessage class="text-red-500" name="gender" />
                 </div>
                 <div>
                     <label class="input-label" for="subject">Subject</label>
-                    <input class="input-text" type="text" id="subject" v-model="form.subject">
+                    <input name="subject" class="input-text" type="text" id="subject" v-model="form.subject">
+                    <ErrorMessage class="text-red-500" name="subject" />
                 </div>
                 <div>
                     <label class="input-label" for="batch_no">Batch No.</label>
-                    <input class="input-text" type="text" id="batch_no" v-model="form.batch_no">
+                    <input name="batch_no" class="input-text" type="text" id="batch_no" v-model="form.batch_no">
+                    <ErrorMessage class="text-red-500" name="batch_no" />
                 </div>
                 <div>
                     <label class="input-label" for="enroll_year">Enroll Year</label>
-                    <input class="input-text" type="number" id="enroll_year" v-model="form.enroll_year" maxlength="4"
-                        pattern="[1-9][0-9]{3}" required>
+                    <input name="enroll_year" class="input-text" type="number" id="enroll_year" v-model="form.enroll_year"
+                        maxlength="4" pattern="[1-9][0-9]{3}" required>
+                    <ErrorMessage class="text-red-500" name="enroll_year" />
                 </div>
                 <div>
                     <label class="input-label" for="graduation_year">Graduation Year</label>
-                    <input class="input-text" type="text" id="graduation_year" v-model="form.graduation_year">
+                    <input name="graduation_year" class="input-text" type="text" id="graduation_year"
+                        v-model="form.graduation_year">
+                    <ErrorMessage class="text-red-500" name="graduation_year" />
                 </div>
                 <div>
                     <label class="input-label" for="street_address">Street Address</label>
-                    <input class="input-text" type="text" id="street_address" v-model="form.street_address">
+                    <input name="street_address" class="input-text" type="text" id="street_address"
+                        v-model="form.street_address">
+                    <ErrorMessage class="text-red-500" name="street_address" />
                 </div>
                 <div>
                     <label class="input-label" for="state">State</label>
-                    <input class="input-text" type="text" id="state" v-model="form.state">
+                    <input name="state" class="input-text" type="text" id="state" v-model="form.state">
+                    <ErrorMessage class="text-red-500" name="state" />
                 </div>
                 <div>
                     <label class="input-label" for="city">City</label>
-                    <input class="input-text" type="text" id="city" v-model="form.city">
+                    <input name="city" class="input-text" type="text" id="city" v-model="form.city">
+                    <ErrorMessage class="text-red-500" name="city" />
                 </div>
                 <div>
                     <label class="input-label" for="postal_code">Postal Code</label>
-                    <input class="input-text" type="text" id="postal_code" v-model="form.postal_code">
+                    <input name="postal_code" class="input-text" type="text" id="postal_code" v-model="form.postal_code">
+                    <ErrorMessage class="text-red-500" name="postal_code" />
                 </div>
             </div>
 
@@ -64,16 +78,19 @@
             <div class="grid grid-cols-2 gap-10 mt-4">
                 <div class="col-span-2">
                     <label class="input-label" for="username">Username</label>
-                    <input class="input-text" type="text" id="username" v-model="form.username">
+                    <input name="username" class="input-text" type="text" id="username" v-model="form.username">
+                    <ErrorMessage class="text-red-500" name="username" />
                 </div>
                 <div>
                     <label class="input-label" for="password">Password</label>
-                    <input class="input-text" type="password" id="password" v-model="form.password">
+                    <input name="password" class="input-text" type="password" id="password" v-model="form.password">
+                    <ErrorMessage class="text-red-500" name="password" />
                 </div>
                 <div>
-                    <label class="input-label" for="password_confirmation">Password Confirmation</label>
-                    <input class="input-text" type="password" id="password_confirmation"
-                        v-model="form.password_confirmation">
+                    <label class="input-label" for="confirmation">Password Confirmation</label>
+                    <input name="confirmation" class="input-text" type="password" id="confirmation"
+                        v-model="form.confirmation">
+                    <ErrorMessage class="text-red-500" name="confirmation" />
                 </div>
                 <TwButton class="w-36" type="submit">Submit</TwButton>
 
@@ -89,8 +106,20 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 const schema = {
     first_name: 'required',
     last_name: 'required',
-    phone_number:'required',
+    phone_number: 'required',
+    gender: 'required',
+    subject: 'required',
+    batch_no: 'required',
+    enroll_year: 'required',
+    graduation_year: 'required',
+    street_address: 'required',
+    state: 'required',
+    city: 'required',
+    postal_code: 'required',
     email: 'required|email',
+    username: 'required',
+    password: 'required',
+    confirmation: 'required|confirmed:@password'
 }
 
 const gender = ref<Object>({
@@ -112,13 +141,20 @@ const form = ref<Object>({
     postal_code: '',
     username: '',
     password: '',
-    password_confirmation: ''
+    confirmation: ''
 })
 
-function postForm() {
-    console.log(form)
+async function postForm() {
+    console.log('hello')
+    const { data: response } = await useFetch('http://localhost:8000/api/accounts/register', {
+        method: 'post',
+        body: {
+            data: form
+        }
+    })
+    if (response) {
+        console.log(response.value)
+    }
 }
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
