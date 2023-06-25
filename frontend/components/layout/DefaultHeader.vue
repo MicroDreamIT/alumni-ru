@@ -63,7 +63,7 @@ https://tailwindcomponents.com/component/navbar-hamburger-menu
                 </li>
 
                 <li>
-                    <a class="text-sm text-gray-600 hover:text-gray-500">Contact</a>
+                    <nuxt-link :to="{name:'contact'}" class="text-sm text-gray-600 hover:text-gray-500">Contact</nuxt-link>
                 </li>
                 <li class="text-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"

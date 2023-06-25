@@ -1,12 +1,12 @@
 <template>
-    <div @click.self="$emit('update:modelValue', false)" 
+    <div @click.self="$emit('update:modelValue', false)"
         class="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-slate-950">
         <div class="relative">
             <div class="bg-slate-50 p-10 rounded">
                 <!-- if not logged in  -->
                 <div>
                     <p class="text-xl text-center">Request to Sponsor</p>
-                    
+
                     <div class="grid grid-cols-1 gap-5 pt-4">
                         <div>
                             <label class="input-label">Company Name</label>

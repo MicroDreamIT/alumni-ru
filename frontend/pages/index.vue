@@ -17,14 +17,22 @@
 
         <!-- featured event  -->
         <div class="container mx-auto xl:px-20 lg:px-10 px-2">
-            <p class="text-center text-3xl pt-10">
-                Featured Events
+            <p class="text-center text-3xl pt-10 font-bold">
+                Upcoming Events
             </p>
-            <p class="subheading text-center pt-3">Peek at some alumni events happening just around the corner.</p>
-            <div class="grid grid-cols-3 gap-10">
+            <p class="subheading text-center pt-2">Peek at some alumni events happening just around the corner.</p>
+            <div class="grid grid-cols-3 gap-8 pt-10">
                 <template v-for="eventDetail in eventsArr?.results">
-                    <EventsCardrow></EventsCardrow>
+                    <EventsCardrow :event-detail="eventDetail" v-if="!_isEmpty(eventDetail)" :key="eventDetail.id" />
                 </template>
+            </div>
+
+            <div class="text-center">
+                <TwButton class="mt-10">
+                    <nuxt-link :to="{ name: 'events' }">
+                        View More Events
+                    </nuxt-link>
+                </TwButton>
             </div>
 
         </div>
