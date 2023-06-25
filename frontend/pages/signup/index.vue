@@ -2,6 +2,8 @@
     <div class="container mx-auto xl:px-20 lg:px-10 px-2">
         <p class="text-3xl font-bold text-center pt-10">Apply to be a part of Alumni Association</p>
 
+
+
         <Form @submit="postForm" :validation-schema="schema" v-slot="{ errors }">
 
             <div class="grid grid-cols-2 gap-10 pt-10">
@@ -106,20 +108,20 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 const schema = {
     first_name: 'required',
     last_name: 'required',
-    phone_number: 'required',
-    gender: 'required',
-    subject: 'required',
-    batch_no: 'required',
-    enroll_year: 'required',
-    graduation_year: 'required',
-    street_address: 'required',
-    state: 'required',
-    city: 'required',
-    postal_code: 'required',
-    email: 'required|email',
-    username: 'required',
-    password: 'required',
-    confirmation: 'required|confirmed:@password'
+    // phone_number: 'required',
+    // gender: 'required',
+    // subject: 'required',
+    // batch_no: 'required',
+    // enroll_year: 'required',
+    // graduation_year: 'required',
+    // street_address: 'required',
+    // state: 'required',
+    // city: 'required',
+    // postal_code: 'required',
+    // email: 'required|email',
+    // username: 'required',
+    // password: 'required',
+    // confirmation: 'required|confirmed:@password'
 }
 
 const gender = ref<Object>({
@@ -143,18 +145,32 @@ const form = ref<Object>({
     password: '',
     confirmation: ''
 })
-
-async function postForm() {
-    console.log('hello')
-    const { data: response } = await useFetch('http://localhost:8000/api/accounts/register', {
+// function postForm(val:String) {
+//     console.log('hello world', val)
+// }
+const postForm = async () => {
+    const {data, error} = await useFetch('http://localhost:8000/api/accounts/register', {
         method: 'post',
         body: {
-            data: form
+            data:form
         }
     })
-    if (response) {
-        console.log(response.value)
-    }
+    console.log(error.message);
 }
+
+
+
+// async function postForm() {
+//     console.log('hello')
+//     const { data: response } = await useFetch('http://localhost:8000/api/accounts/register', {
+//         method: 'post',
+//         body: {
+//             data: form
+//         }
+//     })
+//     if (response) {
+//         console.log(response.value)
+//     }
+// }
 </script>
 <style lang="scss" scoped></style>
