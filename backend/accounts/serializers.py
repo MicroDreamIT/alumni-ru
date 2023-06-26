@@ -16,7 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=True)
-    password_confirmation = CharField(label='Password Confirmation', write_only=True)
+    confirmation = CharField(label='confirmation', write_only=True)
     first_name = serializers.CharField(write_only=True, required=True, source='user.first_name')
     last_name = serializers.CharField(write_only=True, required=True, source='user.last_name')
 
@@ -27,16 +27,16 @@ class UserSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
-            'password_confirmation',
+            'confirmation',
             'first_name',
             'last_name',
             'profile'
         )
-        extra_kwargs = {'password_confirmation': {'write_only': True}}
+        extra_kwargs = {'confirmation': {'write_only': True}}
 
     def validate(self, data):
         password = data.get('password')
-        confirm_password = data.pop('password_confirmation')
+        confirm_password = data.pop('confirmation')
         if password != confirm_password:
             raise ValidationError('password did not match')
         return data

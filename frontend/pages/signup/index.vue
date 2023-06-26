@@ -149,15 +149,28 @@ const form = ref<Object>({
 //     console.log('hello world', val)
 // }
 const postForm = async () => {
-    const {data, error} = await useFetch('http://localhost:8000/api/accounts/register', {
+    const { data, error } = await useFetch('http://localhost:8000/api/accounts/register', {
         method: 'post',
-        body: {
-            data:form
-        }
+        body: form
     })
-    console.log(error.message);
+
+    console.log(data);
+    console.log(error.value.data);
+    // Might be interesting as well:
+    console.log(error.value.name, error.value.message);
 }
 
+// try {
+
+//     const { data, error } = await useFetch(constants.imageUploadApiUrl, {
+//         headers: { "Content-type": "multipart/form-data" },
+//         method: 'POST',
+//         body: form
+//     })
+//     console.log("data from server", data.value)
+// } catch (error) {
+//     console.log(error)
+// }
 
 
 // async function postForm() {
