@@ -4,7 +4,7 @@
 
 
 
-        <Form @submit="postForm" :validation-schema="schema" v-slot="{ errors }">
+        <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors }">
 
             <div class="grid grid-cols-2 gap-10 pt-10">
                 <div>
@@ -86,7 +86,7 @@
                 <div>
                     <label class="input-label" for="email">Email</label>
                     <input name="email" class="input-text" type="text" id="email" v-model="form.email">
-                    <ErrorMessage class="text-red-500" name="email" />
+                    <ErrorMessage class="text-red-500" name="email"/>
                 </div>
                 <div>
                     <label class="input-label" for="password">Password</label>
@@ -108,8 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Form, Field, ErrorMessage, useForm } from 'vee-validate';
-const { handleSubmit, setFieldError, setErrors } = useForm();
+import { Form, Field, ErrorMessage } from 'vee-validate';
 
 const schema = {
     first_name: 'required',
@@ -152,16 +151,22 @@ const form = ref<Object>({
     confirmation: ''
 })
 
+
 // const postForm = handleSubmit.withControlled(async (values)=>{
 // console.log(values);
 // })
 
-const postForm = async () => {
+
+const onSubmit = async () => {
     const { data, error } = await useFetch('http://localhost:8000/api/accounts/register', {
         method: 'post',
         body: form
     })
-    setErrors(error.value);
+    // console.log(data);
+    // console.log(error);
+    // console.log(error.value);
+    // console.log(error.value.data);
+    // console.log(error.value.name, error.value.message);
 }
 
 
