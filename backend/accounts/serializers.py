@@ -17,8 +17,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=True)
     confirmation = CharField(label='confirmation', write_only=True)
-    first_name = serializers.CharField(write_only=True, required=True, source='user.first_name')
-    last_name = serializers.CharField(write_only=True, required=True, source='user.last_name')
+    first_name = serializers.CharField(
+        write_only=True, required=True, source='user.first_name')
+    last_name = serializers.CharField(
+        write_only=True, required=True, source='user.last_name')
 
     class Meta:
         model = User

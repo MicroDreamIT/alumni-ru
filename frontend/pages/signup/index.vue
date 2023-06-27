@@ -78,10 +78,15 @@
 
             <p class="text-xl pt-10 text-center">Login Detail</p>
             <div class="grid grid-cols-2 gap-10 mt-4">
-                <div class="col-span-2">
+                <div>
                     <label class="input-label" for="username">Username</label>
                     <input name="username" class="input-text" type="text" id="username" v-model="form.username">
                     <ErrorMessage class="text-red-500" name="username" />
+                </div>
+                <div>
+                    <label class="input-label" for="email">Email</label>
+                    <input name="email" class="input-text" type="text" id="email" v-model="form.email">
+                    <ErrorMessage class="text-red-500" name="email" />
                 </div>
                 <div>
                     <label class="input-label" for="password">Password</label>
@@ -103,7 +108,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { Form, Field, ErrorMessage, useForm } from 'vee-validate';
+const { handleSubmit, setFieldError, setErrors } = useForm();
 
 const schema = {
     first_name: 'required',
@@ -145,45 +151,19 @@ const form = ref<Object>({
     password: '',
     confirmation: ''
 })
-// function postForm(val:String) {
-//     console.log('hello world', val)
-// }
+
+// const postForm = handleSubmit.withControlled(async (values)=>{
+// console.log(values);
+// })
+
 const postForm = async () => {
     const { data, error } = await useFetch('http://localhost:8000/api/accounts/register', {
         method: 'post',
         body: form
     })
-
-    console.log(data);
-    console.log(error.value.data);
-    // Might be interesting as well:
-    console.log(error.value.name, error.value.message);
+    setErrors(error.value);
 }
 
-// try {
 
-//     const { data, error } = await useFetch(constants.imageUploadApiUrl, {
-//         headers: { "Content-type": "multipart/form-data" },
-//         method: 'POST',
-//         body: form
-//     })
-//     console.log("data from server", data.value)
-// } catch (error) {
-//     console.log(error)
-// }
-
-
-// async function postForm() {
-//     console.log('hello')
-//     const { data: response } = await useFetch('http://localhost:8000/api/accounts/register', {
-//         method: 'post',
-//         body: {
-//             data: form
-//         }
-//     })
-//     if (response) {
-//         console.log(response.value)
-//     }
-// }
 </script>
 <style lang="scss" scoped></style>
