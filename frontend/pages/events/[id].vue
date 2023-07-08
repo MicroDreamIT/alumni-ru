@@ -21,7 +21,21 @@
                             <div v-for="(tk, index) in eventDetail.ticket" :key="'tk-' + index">
                                 <span>{{ tk.name }}: {{ tk.price }} BDT</span>
                             </div>
-                            <TwButton class="leading-relaxed mt-2">Register Now</TwButton>
+                            <TwButton class="leading-relaxed mt-2" >Register Now</TwButton>
+                            <input type="text" v-model="customerName" id="customer_name" />
+                            <input type="text" v-model="mobile" id="mobile" />
+                            <input type="text" v-model="email" id="email" />
+                            <input type="text" v-model="address" id="address" />
+                            <input type="text" v-model="totalAmount" id="total_amount" />
+<!--                            <button class="btn btn-primary btn-lg btn-block"  @click="initiatePayment">Donate Now</button>-->
+                            <button class="btn btn-primary btn-lg btn-block" id="sslczPayBtn"
+                                    ref="sslczPayBtn"
+                                    style="margin-left: 30px;"
+                                    token="if you have any token validation"
+                                    postdata="If you already have postData"
+                                    order="If you already have the transaction generated for current order"
+                                    endpoint="http://localhost:8000/api/events/pay-now"> Donate Now-
+                            </button>
                         </div>
                     </div>
 
@@ -99,17 +113,43 @@
 </template>
 
 <script lang="ts" setup>
-import 'add-to-calendar-button'
+    import { ref, onMounted } from 'vue';
+    import 'add-to-calendar-button'
 
-const route = useRoute()
-const showRegister = ref<Boolean>(false)
-
-let paramsValue = route.params.id
-const id = (paramsValue as string).split('-')[0]
-
-const { data: eventDetail } = await useFetch('http://localhost:8000/api/events/' + id)
+    const route = useRoute()
+    const showRegister = ref<Boolean>(false)
+    let paramsValue = route.params.id
+    const id = (paramsValue as string).split('-')[0]
+    const { data: eventDetail } = await useFetch('http://localhost:8000/api/events/' + id)
 
 
+    const customerName = ref('asdfa');
+    const mobile = ref('asdf');
+    const email = ref('asdf@adfsa.com');
+    const address = ref('asdfasf');
+    const totalAmount = ref('200');
+    const sslczPayBtn = ref(null);
+
+    onMounted(() => {
+        const script = document.createElement('script');
+        script.src = 'https://sandbox.sslcommerz.com/embed.min.js?' + Math.random().toString(36).substring(7); // Use the appropriate URL
+        document.body.appendChild(script);
+    });
+
+    function initiatePayment() {
+        const order = 'Your Order Details'; // Replace with your actual order information
+
+        const postdata = {
+            cus_name: customerName.value,
+            cus_phone: mobile.value,
+            cus_email: email.value,
+            cus_addr1: address.value,
+            amount: totalAmount.value,
+            order: order,
+        };
+
+        sslczPayBtn.value.setAttribute('postdata', JSON.stringify(postdata));
+    }
 </script>
 
 <style scoped></style>

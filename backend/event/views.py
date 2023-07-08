@@ -23,3 +23,8 @@ class EventDetailView(RetrieveAPIView):
     permission_classes = AllowAny,
     queryset = Event.objects.filter(is_active=True)
     serializer_class = EventSerializer
+
+
+class EventPayment():
+    print('Hello world')
+    pass
