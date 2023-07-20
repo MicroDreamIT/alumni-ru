@@ -1,1 +1,3 @@
 python manage.py seed event --number=15
+venv\Scripts\activate
+pip freeze requirements.txt

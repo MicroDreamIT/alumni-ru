@@ -99,7 +99,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'alumni-ru',
         'USER': 'root',
-        'PASSWORD': 'gdncqr123$',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',  # Usually 'localhost' or '127.0.0.1' for local development
         'PORT': '3306',  # MySQL default port is 3306
     }
@@ -176,3 +176,8 @@ TINYMCE_DEFAULT_CONFIG = {
     "a11ycheck ltr rtl | showcomments addcomment code",
     "custom_undo_redo_levels": 10
 }
+
+
+SSLCOMMERZ_STORE_ID = 'micro5f97c6f46a661'
+SSLCOMMERZ_STORE_PASSWORD = 'your_store_password'
+SSLCOMMERZ_SANDBOX_MODE = True
