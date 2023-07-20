@@ -156,11 +156,13 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://localhost',
-    'http://192.168.1.102:3000'
+    'http://192.168.1.102:3000',
+    'http://localhost:8000'
 )
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     r"^https://\w+\.localhost:3000\.com$",
+    r"^https://\w+\.localhost:8000\.com$",
 ]
 
 TINYMCE_DEFAULT_CONFIG = {

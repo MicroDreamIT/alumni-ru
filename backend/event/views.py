@@ -8,6 +8,7 @@ from sslcommerz_lib import SSLCOMMERZ
 import requests
 from .models import Event
 from .serializers import EventSerializer
+from django.shortcuts import redirect
 
 
 
@@ -35,28 +36,26 @@ def EventPayment(request):
     sslcz = SSLCOMMERZ({'store_id': 'bhtpa5f97c55758c00',
                        'store_pass': 'bhtpa5f97c55758c00@ssl', 'issandbox': True})
     
-    post_body = {}
-    post_body['total_amount'] = 100.26
-    post_body['currency'] = "BDT"
-    post_body['tran_id'] = "12345"
-    post_body['success_url'] = "your success url"
-    post_body['fail_url'] = "your fail url"
-    post_body['cancel_url'] = "your cancel url"
-    post_body['emi_option'] = 0
-    post_body['cus_name'] = "test"
-    post_body['cus_email'] = "test@test.com"
-    post_body['cus_phone'] = "01700000000"
-    post_body['cus_add1'] = "customer address"
-    post_body['cus_city'] = "Dhaka"
-    post_body['cus_country'] = "Bangladesh"
-    post_body['shipping_method'] = "NO"
-    post_body['multi_card_name'] = ""
-    post_body['num_of_item'] = 1
-    post_body['product_name'] = "Test"
-    post_body['product_category'] = "Test Category"
-    post_body['product_profile'] = "general"
-
-
-    response = sslcz.createSession(post_body) # API response
-    print(response)
-    return HttpResponse(response)
+    data = {
+        'total_amount': "100.26",
+        'currency': "BDT",
+        'tran_id': "tran_12345",
+        'success_url': "http://127.0.0.1:3000/payment-successful", # if transaction is succesful, user will be redirected here
+        'fail_url': "http://127.0.0.1:3000/payment-failed", # if transaction is failed, user will be redirected here
+        'cancel_url': "http://127.0.0.1:3000/payment-cancelled", # after user cancels the transaction, will be redirected here
+        'emi_option': "0",
+        'cus_name': "test",
+        'cus_email': "test@test.com",
+        'cus_phone': "01700000000",
+        'cus_add1': "customer address",
+        'cus_city': "Dhaka",
+        'cus_country': "Bangladesh",
+        'shipping_method': "NO",
+        'multi_card_name': "",
+        'num_of_item': 1,
+        'product_name': "Test",
+        'product_category': "Test Category",
+        'product_profile': "general",
+    }
+    response = sslcz.createSession(data)
+    return redirect(response['GatewayPageURL'])

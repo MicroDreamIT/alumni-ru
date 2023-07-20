@@ -34,7 +34,8 @@
                                     token="if you have any token validation"
                                     postdata="If you already have postData"
                                     order="If you already have the transaction generated for current order"
-                                    endpoint="http://localhost:8000/api/events/pay-now"> Donate Now-
+                                    @click="redirectToPaymentGateway"
+                                    endpoint="http://localhost:8000/api/events/pay-now"> Pay Now
                             </button>
                         </div>
                     </div>
@@ -135,8 +136,7 @@
         script.src = 'https://sandbox.sslcommerz.com/embed.min.js?' + Math.random().toString(36).substring(7); // Use the appropriate URL
         document.body.appendChild(script);
     });
-
-    function initiatePayment() {
+    function redirectToPaymentGateway() {
         const order = 'Your Order Details'; // Replace with your actual order information
 
         const postdata = {
@@ -147,9 +147,10 @@
             amount: totalAmount.value,
             order: order,
         };
-
         sslczPayBtn.value.setAttribute('postdata', JSON.stringify(postdata));
+        window.location.href = sslczPayBtn.value.getAttribute('endpoint');
     }
+
 </script>
 
 <style scoped></style>
